@@ -9,7 +9,7 @@ $ cd start-word2pdf
 
 ## 部署到函数计算
 
-安装好 s 工具后，将 s.yaml 中的 OSS 相关的环境变量改成您自己的，然后:
+安装好 s 工具后，将 s.yaml 中的 Image 和 OSS 相关的环境变量改成您自己的，然后:
 
 ```bash
 $ s build --use-docker --dockerfile ./code/Dockerfile
