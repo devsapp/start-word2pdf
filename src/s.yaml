@@ -1,0 +1,31 @@
+edition: 1.0.0
+name: word2pdf
+access: '{{access}}'
+
+services:
+  word2pdf:
+    component: fc
+    props:
+      region: cn-hangzhou
+      service:
+        name: fc-liboffice
+        description: 'make a word change to pdf'
+        internetAccess: true
+        role:
+          policies:
+            - AliyunContainerRegistryReadOnlyAccess
+        #logConfig: auto
+      function:
+        name: word2pdf
+        runtime: custom-container
+        codeUri: ./code
+        memorySize: 3072
+        timeout: 900
+        caPort: 9000
+        customContainerConfig:
+          image: registry-vpc.cn-hangzhou.aliyuncs.com/fc-demo/fc-liboffice:v0.4
+        environmentVariables:
+          TZ: Asia/Shanghai
+          OSS_BUCKET: <your bucket>
+          OSS_AK_ID: <your ak id>
+          OSS_AK_SECRET: <your ak secret>
