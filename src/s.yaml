@@ -11,9 +11,6 @@ services:
         name: fc-liboffice
         description: 'make a word change to pdf'
         internetAccess: true
-        role:
-          policies:
-            - AliyunContainerRegistryReadOnlyAccess
         #logConfig: auto
       function:
         name: word2pdf
