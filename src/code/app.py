@@ -58,7 +58,8 @@ def invoke():
         result = bucket.put_object_from_file(
             pdf_file, '/tmp/' + shortname + ".pdf")
 
-        subprocess.check_call(["rm", "-rf", "/tmp"])
+        subprocess.check_call(["rm", "-rf", '/tmp/' + tempfilename])
+        subprocess.check_call(["rm", "-rf", '/tmp/' + shortname + ".pdf"])
         print("FC Invoke End RequestId: " + request_id)
         if result.status == 200:
             return "upload to oss success!"
