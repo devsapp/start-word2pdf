@@ -8,7 +8,7 @@ HomePage: https://github.com/devsapp/start-word2pdf
 Tags:
   - 文档转换
   - 计算任务
-Category: 其他
+Category: 新手入门
 Service:
   函数计算:
     Authorities:
