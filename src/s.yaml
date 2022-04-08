@@ -16,7 +16,7 @@ access: "{{ access }}"
 vars: # 全局变量
   region: cn-beijing
   service:
-    name: fc-liboffice
+    name: "{{ serviceName }}"
     description: 'make a word change to pdf'
     internetAccess: true
 
@@ -25,28 +25,24 @@ services:
     component:  fc
     actions:
       pre-deploy:
-        - run: s build --use-docker --dockerfile ./code/Dockerfile
-          path: ./
-#      post-deploy: # 在deploy之前运行
-#        - run: s nas upload ./db.sqlite3 /mnt/auto  # 要运行的命令行
-#          path: ./ # 命令行运行的路径
+        - component: fc build --use-docker --dockerfile ./code/Dockerfile
     props: # 组件的属性值
       region: ${vars.region}
       service: ${vars.service}
       function:
-        name: word2pdf
+        name: "{{ functionName }}"
         runtime: custom-container
         codeUri: ./code
         memorySize: 3072
         timeout: 900
         caPort: 9000
         customContainerConfig:
-          image: registry-vpc.cn-hangzhou.aliyuncs.com/fc-demo/fc-liboffice:v0.4
+          image:  "{{ acrRegistry }}"
         environmentVariables:
-          TZ: Asia/Shanghai
-          OSS_BUCKET: <your bucket>
-          OSS_AK_ID: <your ak id>
-          OSS_AK_SECRET: <your ak secret>
+          TZ: "{{ timeZone }}"
+          OSS_BUCKET: "{{ ossBucket }}"
+          OSS_AK_ID: "{{ ossAKID }}"
+          OSS_AK_SECRET: "{{ ossAKSecret }}"
 
 #  next-function: # 第二个函数的案例，仅供参考
 #    # 如果在当前项目下执行 s deploy，会同时部署模块：
