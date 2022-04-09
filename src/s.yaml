@@ -14,7 +14,7 @@ name: hello-world-app
 access: "{{ access }}"
 
 vars: # 全局变量
-  region: cn-beijing
+  region: "{{ region }}"
   service:
     name: "{{ serviceName }}"
     description: 'make a word change to pdf'
