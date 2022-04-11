@@ -49,6 +49,10 @@ def invoke():
         word_file = evt["oss_file"]
         fileDir, tempfilename = os.path.split(word_file)
         shortname, _ = os.path.splitext(tempfilename)
+        accessKeyId = request.headers['x-fc-access-key-id']
+        accessKeySecret = request.headers['x-fc-access-key-secret']
+        securityToken = request.headers['x-fc-security-token']
+        auth = oss2.StsAuth(accessKeyId, accessKeySecret, securityToken)
         bucket = oss2.Bucket(auth, oss_endpoint, os.environ['OSS_BUCKET'])
         bucket.get_object_to_file(word_file, '/tmp/' + tempfilename)
         subprocess.check_call(["/usr/bin/soffice", "--convert-to", "pdf:writer_pdf_Export", "--outdir",

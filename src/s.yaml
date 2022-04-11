@@ -19,6 +19,7 @@ vars: # 全局变量
     name: "{{ serviceName }}"
     description: 'make a word change to pdf'
     internetAccess: true
+    role: "{{ roleArn }}"
 
 services:
   framework: # 业务名称/模块名称
@@ -41,8 +42,6 @@ services:
         environmentVariables:
           TZ: "{{ timeZone }}"
           OSS_BUCKET: "{{ ossBucket }}"
-          OSS_AK_ID: "{{ ossAKID }}"
-          OSS_AK_SECRET: "{{ ossAKSecret }}"
 
 #  next-function: # 第二个函数的案例，仅供参考
 #    # 如果在当前项目下执行 s deploy，会同时部署模块：
