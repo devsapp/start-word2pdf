@@ -40,7 +40,6 @@ def invoke():
 
     region = request.headers['x-fc-region']
     oss_endpoint = "http://oss-{}-internal.aliyuncs.com".format(region)
-    auth = oss2.Auth(os.environ['OSS_AK_ID'], os.environ['OSS_AK_SECRET'])
 
     # do your things
     try:
