@@ -10,7 +10,7 @@
 #   有问题快来钉钉群问一下吧：33947367
 # ------------------------------------
 edition: 1.0.0
-name: hello-world-app
+name: word2pdf
 access: "{{ access }}"
 
 vars: # 全局变量
@@ -33,7 +33,7 @@ services:
         name: "{{ functionName }}"
         runtime: custom-container
         codeUri: ./code
-        memorySize: 3072
+        memorySize: 1536
         timeout: 900
         caPort: 9000
         customContainerConfig:
