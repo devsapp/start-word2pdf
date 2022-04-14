@@ -25,8 +25,8 @@ Parameters:
     - functionName
     - timeZone
     - ossBucket
-    - ossAKID
-    - ossAKSecret
+    - acrRegistry
+    - roleArn
   properties:
     region:
       title: 地域
