@@ -60,7 +60,7 @@ $ s invoke -e '{"oss_file":"word2pdf/example.docx"}'
 如果进行二次开发， 有新的依赖 python lib, 可以直接使用如下命令：
 
 ```bash
-$  s build --use-sandbox
+$ s build --use-sandbox
 # 进入 sandbox 后
 $ s-install pip install xxx
 
