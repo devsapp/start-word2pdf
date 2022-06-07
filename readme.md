@@ -55,6 +55,17 @@ $ s invoke -e '{"oss_file":"word2pdf/example.docx"}'
 
 函数调用成功后，生成的 pdf 文件在和 docx 相同的 OSS 目录中，比如这个例子是在 word2pdf/example.pdf。
 
+# 其他
+如果进行二次开发， 有新的依赖 python lib, 可以直接使用如下命令：
+
+```bash
+$  s build --use-sandbox
+# 进入 sandbox 后
+$ s-install pip install xxx
+
+# exit 退出， 然后重新 s deploy 即可
+```
+
 </appdetail>
 
 <devgroup>
