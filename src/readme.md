@@ -19,19 +19,9 @@
 </description>
 
 <table>
-
-
-
 </table>
 
 <codepre id="codepre">
-
-# 代码 & 预览
-
-- [ :smiley_cat:  源代码](https://github.com/devsapp/start-word2pdf)
-
-        
-
 </codepre>
 
 <deploy>
