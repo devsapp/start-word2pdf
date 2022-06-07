@@ -11,18 +11,6 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 
 
-@app.route('/initialize', methods=['POST'])
-def initialize():
-    # See FC docs for all the HTTP headers: https://www.alibabacloud.com/help/doc-detail/132044.htm#common-headers
-    request_id = request.headers.get("x-fc-request-id", "")
-
-    # Use the following code to get temporary credentials
-    # access_key_id = request.headers['x-fc-access-key-id']
-    # access_key_secret = request.headers['x-fc-access-key-secret']
-    # access_security_token = request.headers['x-fc-security-token']
-    return "Function is initialized, request_id: " + request_id + "\n"
-
-
 @app.route('/invoke', methods=['POST'])
 def invoke():
     # See FC docs for all the HTTP headers: https://www.alibabacloud.com/help/doc-detail/132044.htm#common-headers
@@ -54,7 +42,7 @@ def invoke():
         auth = oss2.StsAuth(accessKeyId, accessKeySecret, securityToken)
         bucket = oss2.Bucket(auth, oss_endpoint, os.environ['OSS_BUCKET'])
         bucket.get_object_to_file(word_file, '/tmp/' + tempfilename)
-        subprocess.check_call(["/usr/bin/soffice", "--convert-to", "pdf:writer_pdf_Export", "--outdir",
+        subprocess.check_call(["soffice", "--convert-to", "pdf:writer_pdf_Export", "--outdir",
                                "/tmp", '/tmp/' + tempfilename])
         subprocess.check_call(["ls", "-ll", "/tmp"])
         pdf_file = os.path.join(fileDir, shortname + ".pdf")
@@ -77,7 +65,8 @@ def invoke():
             "stack": trace
         }
         print(errRet)
-        print("FC Invoke End RequestId: " + request_id)
+        print("FC Invoke End RequestId: " + request_id +
+              ", Error: Unhandled function error")
         return errRet, 404, [("x-fc-status", "404")]
 
 
