@@ -36,11 +36,11 @@ services:
     actions:          # 自定义执行逻辑，关于actions 的使用，可以参考：https://www.serverless-devs.com/serverless-devs/yaml#行为描述
       pre-deploy:  # 在deploy之前运行
         - run: wget http://devsapp.functioncompute.com/devsapp/libreoffice-layer.zip
-          path: ./code
+          path: /tmp
         - plugin: layer-fc
           args:
             name: libreoffice
-            codeUri: ./code/libreoffice-layer.zip
+            codeUri: /tmp/libreoffice-layer.zip
             #forceUpdate: true
             runtime:
               - custom
@@ -70,8 +70,8 @@ services:
         environmentVariables:
           TZ: "{{ timeZone }}"
           OSS_BUCKET: "{{ ossBucket }}"
-          LD_LIBRARY_PATH: /opt/libreoffice-layer/root/usr/lib/libreoffice/program:/opt/libreoffice-layer/root/usr/local/lib:/opt/libreoffice-layer/root/usr/lib:/opt/libreoffice-layer/root/usr/lib/x86_64-linux-gnu:/opt/libreoffice-layer/root/usr/lib64:/opt/libreoffice-layer/root/lib:/opt/libreoffice-layer/root/lib/x86_64-linux-gnu:/code:/code/lib:/usr/local/lib
-          PATH: /opt/libreoffice-layer/root/usr/local/bin:/opt/libreoffice-layer/root/usr/local/sbin:/opt/libreoffice-layer/root/usr/bin:/opt/libreoffice-layer/root/usr/sbin:/opt/libreoffice-layer/root/sbin:/opt/libreoffice-layer/root/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/sbin:/bin
+          LD_LIBRARY_PATH: /opt/root/usr/lib/libreoffice/program:/opt/root/usr/local/lib:/opt/root/usr/lib:/opt/root/usr/lib/x86_64-linux-gnu:/opt/root/usr/lib64:/opt/root/lib:/opt/root/lib/x86_64-linux-gnu:/code:/code/lib:/usr/local/lib
+          PATH: /opt/root/usr/local/bin:/opt/root/usr/local/sbin:/opt/root/usr/bin:/opt/root/usr/sbin:/opt/root/sbin:/opt/root/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/sbin:/bin
           PYTHONUSERBASE: /code/.s/python
 #  next-function: # 第二个函数的案例，仅供参考
 #    # 如果在当前项目下执行 s deploy，会同时部署模块：
