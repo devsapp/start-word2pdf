@@ -62,18 +62,21 @@ $ s invoke -e '{"word_file":"example.docx"}'
     "word_file": "example.docx",  
     "mark_text": "AliyunFC",  // 水印文字， 如果给 PDF 加水印，该参数必填
     "pagesize": [595.275590551181, 841.8897637795275], // 可选参数，默认是 A4 大小， (21*cm, 29.7*cm), 其中 1cm=28.346456692913385
-    "font": "Helvetica", // 字体，可选参数， 默认为 Helvetica
+    "font": "Helvetica", // 字体，可选参数， 默认为 Helvetica,  中文字体可选择为 zenhei 或 microhei
     "font_size": 30, // 字体d大小，可选参数， 默认为 30
     "font_color": [0, 0, 0], // 字体颜色，格式为 RGB， 默认为黑色
     "rotate": 30, // 旋转角度, 可选参数， 默认为 0
     "opacity": 0.1, // 透明度, 可选参数， 默认为 0.1， 1 表示不透明
-    "density": [198.4251968503937, 283.46456692913387] // 水印密度，水印文字间隔， 默认是 [141.73228346456693, 141.73228346456693]，即（7*cm, 10*cm),  表示每个水印文字在横坐标和纵坐标的间隔都是 5cm
+    "density": [198.4251968503937, 283.46456692913387] // 水印密度，水印文字间隔，默认是 [141.73228346456693, 141.73228346456693]，即（7*cm, 10*cm),  表示每个水印文字在横坐标和纵坐标的间隔分别是 7cm 和 10cm
 }
 ```
 
 比如:
 ```bash
 $ s invoke -e '{"word_file":"example.docx", "mark_text": "AliyunFC", "rotate":30}'
+
+# 如果是中文水印, font 为 zenhei 或者 microhei
+$ s invoke -e '{"word_file":"example.docx", "mark_text": "函数计算"", "rotate":30, "font": "zenhei"}'
 ```
 
 生成带有水印的 example.pdf 示例:

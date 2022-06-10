@@ -1,3 +1,4 @@
+from reportlab.pdfbase import pdfmetrics, ttfonts
 from PyPDF2 import PdfFileReader, PdfFileWriter
 from reportlab.lib.units import cm
 from reportlab.pdfgen import canvas
@@ -12,6 +13,12 @@ from flask import Flask, request
 app = Flask(__name__)
 
 logging.basicConfig(level=logging.INFO)
+
+# support chinese
+pdfmetrics.registerFont(ttfonts.TTFont('zenhei', os.path.join(
+    "/usr/share/fonts/truetype/wqy", 'wqy-zenhei.ttc')))
+pdfmetrics.registerFont(ttfonts.TTFont('microhei', os.path.join(
+    "/usr/share/fonts/truetype/wqy", 'wqy-microhei.ttc')))
 
 
 def add_watermark(pdf_file_in, pdf_file_mark, pdf_file_out):
