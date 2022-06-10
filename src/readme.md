@@ -80,7 +80,9 @@ $ s invoke -e '{"word_file":"example.docx", "mark_text": "函数计算"", "rotat
 ```
 
 生成带有水印的 example.pdf 示例:
+    
 ![](https://img.alicdn.com/imgextra/i4/O1CN01xJymEK1MP9YHRBkQx_!!6000000001426-2-tps-652-841.png)
+
 # 其他
 如果进行二次开发， 有新的依赖 python lib, 可以直接使用如下命令：
 
