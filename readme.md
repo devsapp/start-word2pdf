@@ -67,7 +67,7 @@ $ s invoke -e '{"word_file":"example.docx"}'
     "font_color": [0, 0, 0], // 字体颜色，格式为 RGB， 默认为黑色
     "rotate": 30, // 旋转角度, 可选参数， 默认为 0
     "opacity": 0.1, // 透明度, 可选参数， 默认为 0.1， 1 表示不透明
-    "density": [141.73228346456693, 141.73228346456693] // 水印密度，水印文字间隔， 默认是 [141.73228346456693, 141.73228346456693]，即（5*cm, 5*cm),  表示每个水印文字在横坐标和纵坐标的间隔都是 5cm
+    "density": [198.4251968503937, 283.46456692913387] // 水印密度，水印文字间隔， 默认是 [141.73228346456693, 141.73228346456693]，即（7*cm, 10*cm),  表示每个水印文字在横坐标和纵坐标的间隔都是 5cm
 }
 ```
 
@@ -77,7 +77,7 @@ $ s invoke -e '{"word_file":"example.docx", "mark_text": "AliyunFC", "rotate":30
 ```
 
 生成带有水印的 example.pdf 示例:
-![](https://img.alicdn.com/imgextra/i1/O1CN01Tu6Ovz1gT5GcXhfm0_!!6000000004142-2-tps-647-842.png)
+![](https://img.alicdn.com/imgextra/i4/O1CN01xJymEK1MP9YHRBkQx_!!6000000001426-2-tps-652-841.png)
 # 其他
 如果进行二次开发， 有新的依赖 python lib, 可以直接使用如下命令：
 
