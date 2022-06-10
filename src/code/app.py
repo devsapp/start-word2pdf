@@ -68,8 +68,8 @@ def create_watermark(evt):
     font_color = evt.get('font_color', (0, 0, 0))
     rotate = evt.get('rotate', 0)
     opacity = evt.get('opacity', 0.1)
-    # default is (5*cm, 5*cm)
-    density = evt.get('density', [141.73228346456693, 141.73228346456693])
+    # default is (7*cm, 10*cm)
+    density = evt.get('density', [198.4251968503937, 283.46456692913387])
     _create_watermark(mark_text, pagesize, font, font_size,
                       font_color, rotate, opacity, density)
     print('create_watermark success!')
