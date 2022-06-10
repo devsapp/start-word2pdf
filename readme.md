@@ -76,6 +76,7 @@ $ s invoke -e '{"word_file":"example.docx"}'
 $ s invoke -e '{"word_file":"example.docx", "mark_text": "AliyunFC", "rotate":30}'
 ```
 
+生成带有水印的 example.pdf 示例:
 ![](https://img.alicdn.com/imgextra/i1/O1CN01Tu6Ovz1gT5GcXhfm0_!!6000000004142-2-tps-647-842.png)
 # 其他
 如果进行二次开发， 有新的依赖 python lib, 可以直接使用如下命令：
