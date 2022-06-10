@@ -50,12 +50,33 @@
 
 ```bash
 # 调用
-$ s invoke -e '{"oss_file":"word2pdf/example.docx"}'
+$ s invoke -e '{"word_file":"example.docx"}'
 ```
 
-函数调用成功后，生成的 pdf 文件在和 docx 相同的 OSS 目录中，比如这个例子是在 word2pdf/example.pdf。
+函数调用成功后，生成的 pdf 文件在和 docx 相同的 OSS 目录中，比如这个例子是在 example.pdf。
 
+如果您想 word 转 pdf 同时再加上水印， 需要增加如下相关的参数：
 
+```
+{
+    "word_file": "example.docx",  
+    "mark_text": "AliyunFC",  // 水印文字， 如果给 PDF 加水印，该参数必填
+    "pagesize": [595.275590551181, 841.8897637795275], // 可选参数，默认是 A4 大小， (21*cm, 29.7*cm), 其中 1cm=28.346456692913385
+    "font": "Helvetica", // 字体，可选参数， 默认为 Helvetica
+    "font_size": 30, // 字体d大小，可选参数， 默认为 30
+    "font_color": [0, 0, 0], // 字体颜色，格式为 RGB， 默认为黑色
+    "rotate": 30, // 旋转角度, 可选参数， 默认为 0
+    "opacity": 0.1, // 透明度, 可选参数， 默认为 0.1， 1 表示不透明
+    "density": [141.73228346456693, 141.73228346456693] // 水印密度，水印文字间隔， 默认是 [141.73228346456693, 141.73228346456693]，即（5*cm, 5*cm),  表示每个水印文字在横坐标和纵坐标的间隔都是 5cm
+}
+```
+
+比如:
+```bash
+$ s invoke -e '{"word_file":"example.docx", "mark_text": "AliyunFC", "rotate":30}'
+```
+
+![](https://img.alicdn.com/imgextra/i1/O1CN01Tu6Ovz1gT5GcXhfm0_!!6000000004142-2-tps-647-842.png)
 # 其他
 如果进行二次开发， 有新的依赖 python lib, 可以直接使用如下命令：
 
