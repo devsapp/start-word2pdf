@@ -76,11 +76,13 @@ $ s invoke -e '{"word_file":"example.docx"}'
 $ s invoke -e '{"word_file":"example.docx", "mark_text": "AliyunFC", "rotate":30}'
 
 # 如果是中文水印, font 为 zenhei 或者 microhei
-$ s invoke -e '{"word_file":"example.docx", "mark_text": "函数计算"", "rotate":30, "font": "zenhei"}'
+$ s invoke -e '{"word_file":"example.docx", "mark_text": "函数计算", "rotate":30, "font": "zenhei"}'
 ```
 
 生成带有水印的 example.pdf 示例:
+
 ![](https://img.alicdn.com/imgextra/i4/O1CN01xJymEK1MP9YHRBkQx_!!6000000001426-2-tps-652-841.png)
+
 # 其他
 如果进行二次开发， 有新的依赖 python lib, 可以直接使用如下命令：
 
