@@ -1,0 +1,5 @@
+oss2
+flask
+Pillow
+PyPDF2
+reportlab
