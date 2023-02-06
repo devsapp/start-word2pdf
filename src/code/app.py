@@ -1,5 +1,5 @@
 from reportlab.pdfbase import pdfmetrics, ttfonts
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF2 import PdfReader , PdfWriter 
 from reportlab.lib.units import cm
 from reportlab.pdfgen import canvas
 import logging
@@ -23,18 +23,18 @@ pdfmetrics.registerFont(ttfonts.TTFont('microhei', os.path.join(
 
 def add_watermark(pdf_file_in, pdf_file_mark, pdf_file_out):
     print(pdf_file_in, pdf_file_mark, pdf_file_out)
-    pdf_output = PdfFileWriter()
+    pdf_output = PdfWriter()
     with open(pdf_file_in, 'rb') as input_stream:
-        pdf_input = PdfFileReader(input_stream, strict=False)
+        pdf_input = PdfReader(input_stream, strict=False)
 
-        pageNum = pdf_input.getNumPages()
-        pdf_watermark = PdfFileReader(open(pdf_file_mark, 'rb'), strict=False)
+        pageNum = len(pdf_input.pages)
+        pdf_watermark = PdfReader(open(pdf_file_mark, 'rb'), strict=False)
 
         for i in range(pageNum):
-            page = pdf_input.getPage(i)
-            page.mergePage(pdf_watermark.getPage(0))
-            page.compressContentStreams()
-            pdf_output.addPage(page)
+            page = pdf_input.pages[i]
+            page.merge_page(pdf_watermark.pages[0])
+            page.compress_content_streams()
+            pdf_output.add_page(page)
 
         with open(pdf_file_out, 'wb') as f:
             pdf_output.write(f)
