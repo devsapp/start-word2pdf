@@ -1,96 +1,36 @@
-# ------------------------------------
-#   欢迎您使用阿里云函数计算 FC 组件进行项目开发
-#   组件仓库地址：https://github.com/devsapp/fc
-#   组件帮助文档：https://www.serverless-devs.com/fc/readme
-#   Yaml参考文档：https://www.serverless-devs.com/fc/yaml/readme
-#   关于：
-#      - Serverless Devs和FC组件的关系、如何声明/部署多个函数、超过50M的代码包如何部署
-#      - 关于.fcignore使用方法、工具中.s目录是做什么、函数进行build操作之后如何处理build的产物
-#   等问题，可以参考文档：https://www.serverless-devs.com/fc/tips
-#   关于如何做CICD等问题，可以参考：https://www.serverless-devs.com/serverless-devs/cicd
-#   关于如何进行环境划分等问题，可以参考：https://www.serverless-devs.com/serverless-devs/extend
-#   更多函数计算案例，可参考：https://github.com/devsapp/awesome/
-#   有问题快来钉钉群问一下吧：33947367
-# ------------------------------------
-edition: 1.0.0
+edition: 3.0.0
 name: word2pdf
-# access 是当前应用所需要的密钥信息配置：
-# 密钥配置可以参考：https://www.serverless-devs.com/serverless-devs/command/config
-# 密钥使用顺序可以参考：https://www.serverless-devs.com/serverless-devs/tool#密钥使用顺序与规范
-access: "{{ access }}"
-
-vars: # 全局变量
-  region: "{{ region }}"
-  service:
-    name: "{{ serviceName }}"
-    description: 'make a word change to pdf'
-    internetAccess: true
-    role: "{{ roleArn }}"
-
-services:
-  word2pdf: # 业务名称/模块名称
-    # 如果只想针对 ai-project 下面的业务进行相关操作，可以在命令行中加上 ai-project，例如：
-    # 只对async-task进行构建：s ai-project build
-    # 如果不带有 ai-project ，而是直接执行 s build，工具则会对当前Yaml下，所有和 ai-project 平级的业务模块（如有其他平级的模块，例如下面注释的next-function），按照一定顺序进行 build 操作
-    component:  fc    # 组件名称，Serverless Devs 工具本身类似于一种游戏机，不具备具体的业务能力，组件类似于游戏卡，用户通过向游戏机中插入不同的游戏卡实现不同的功能，即通过使用不同的组件实现不同的具体业务能力
-    actions:          # 自定义执行逻辑，关于actions 的使用，可以参考：https://www.serverless-devs.com/serverless-devs/yaml#行为描述
-      pre-deploy:  # 在deploy之前运行
-        - plugin: layer-fc
-          args:
-            name: libreoffice
-            codeUri: http://devsapp.functioncompute.com/devsapp/libreoffice-layer.zip
-            #forceUpdate: true
-            runtime:
-              - custom
-        - component: fc build --use-docker
-#        - run: docker build xxx            # 要执行的系统命令，类似于一种钩子的形式
-#          path: ./src                      # 执行系统命令/钩子的路径
-#        - plugin: myplugin                 # 与运行的插件 （可以通过s cli registry search --type Plugin 获取组件列表）
-#          args:                            # 插件的参数信息
-#            testKey: testValue
-#        - run: s version publish -a demo
-#          path: ./src
-    props: # 组件的属性值
+access: '{{ access }}'
+vars:
+  region: '{{ region }}'
+resources:
+  word2pdf:
+    component: fc3
+    props:
       region: ${vars.region}
-      service: ${vars.service}
-      function:
-        name: "{{ functionName }}"
-        runtime: custom
-        codeUri: ./code
-        memorySize: 3072
-        timeout: 1200
-        caPort: 9000
-        customRuntimeConfig:
-          command:
-            - python
-          args:
-            - -u
-            - app.py
-        environmentVariables:
-          TZ: "{{ timeZone }}"
-          OSS_BUCKET: "{{ ossBucket }}"
-          LD_LIBRARY_PATH: /opt/root/usr/lib/libreoffice/program:/opt/root/usr/local/lib:/opt/root/usr/lib:/opt/root/usr/lib/x86_64-linux-gnu:/opt/root/usr/lib64:/opt/root/lib:/opt/root/lib/x86_64-linux-gnu
-          PATH: /opt/root/usr/local/bin:/opt/root/usr/local/sbin:/opt/root/usr/bin:/opt/root/usr/sbin:/opt/root/sbin:/opt/root/bin
-        # 如果是很大的 PDF 文件， 想使用异步调用，可以开启如下配置,  将每次函数调用看做一个任务执行
-        asyncConfiguration:
-          # destination:
-          #   onSuccess: acs:fc:::services/${vars.service.name}/functions/dest-succ
-          #   onFailure: acs:fc:::services/${vars.service.name}/functions/dest-fail
-          maxAsyncEventAgeInSeconds: 7200
-          maxAsyncRetryAttempts: 3
-          statefulInvocation: true
-
-#  next-function: # 第二个函数的案例，仅供参考
-#    # 如果在当前项目下执行 s deploy，会同时部署模块：
-#    #   helloworld：服务hello-world-service，函数cpp-event-function
-#    #   next-function：服务hello-world-service，函数next-function-example
-#    # 如果想单独部署当前服务与函数，可以执行 s + 模块名/业务名 + deploy，例如：s next-function deploy
-#    # 如果想单独部署当前函数，可以执行 s + 模块名/业务名 + deploy function，例如：s next-function deploy function
-#    # 更多命令可参考：https://www.serverless-devs.com/fc/readme#文档相关
-#    component: fc
-#    props:
-#      region: ${vars.region}
-#      service: ${vars.service} # 应用整体的服务配置
-#      function: # 定义一个新的函数
-#        name: next-function-example
-#        description: 'hello world by serverless devs'
+      runtime: custom
+      memorySize: 3072
+      timeout: 1200
+      internetAccess: true
+      role: '{{ roleArn }}'
+      customRuntimeConfig:
+        command:
+          - python
+        args:
+          - app.py
+        port: 9000
+      layers:
+        - acs:fc:${vars.region}:1813774388953700:layers/libreoffice-layer-v3/versions/1
+      environmentVariables:
+        TZ: '{{ timeZone }}'
+        OSS_BUCKET: '{{ ossBucket }}'
+        LD_LIBRARY_PATH: >-
+          /opt/root/usr/lib/libreoffice/program:/opt/root/usr/local/lib:/opt/root/usr/lib:/opt/root/usr/lib/x86_64-linux-gnu:/opt/root/usr/lib64:/opt/root/lib:/opt/root/lib/x86_64-linux-gnu
+        PATH: >-
+          /opt/root/usr/local/bin:/opt/root/usr/local/sbin:/opt/root/usr/bin:/opt/root/usr/sbin:/opt/root/sbin:/opt/root/bin:/usr/local/bin/apache-maven/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/ruby/bin
+        PYTHONPATH: /opt/python
+      functionName: '{{ functionName }}'
+      code: ./code
+      asyncInvokeConfig:
+        maxAsyncEventAgeInSeconds: 7200
+        maxAsyncRetryAttempts: 3

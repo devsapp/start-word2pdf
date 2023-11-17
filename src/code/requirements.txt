@@ -1,7 +1,0 @@
-oss2==2.16.0
-flask==2.2.2
-Pillow==9.4.0
-PyPDF2==3.0.1
-reportlab==3.6.12
-cryptography==3.4.8
-urllib3==1.26.2
