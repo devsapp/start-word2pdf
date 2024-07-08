@@ -13,7 +13,10 @@ async function postInit(inputObj) {
          FC : https://fc.console.aliyun.com/
          ACR: https://cr.console.aliyun.com/
          OSS: https://oss.console.aliyun.com/
-     
+         
+     Tips：
+         - FC3 Component: https://docs.serverless-devs.com/user-guide/aliyun/#fc3
+         
      * 额外说明：
         1. 完成项目初始化之后，需要在s.yaml中进行相关内容的配置：
            - 在environmentVariables参数下，配置对象存储相关的信息
