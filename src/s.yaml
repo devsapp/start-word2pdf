@@ -5,7 +5,7 @@ vars:
   region: '{{ region }}'
 resources:
   word2pdf:
-    component: fc3
+    component: fc3@0.0.34
     props:
       region: ${vars.region}
       runtime: custom
