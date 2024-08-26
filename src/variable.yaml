@@ -1,0 +1,10 @@
+services: #服务变量
+  word2pdf: 
+    ossBucket:
+      title: OSS 存储桶名
+      type: string
+      default: ""
+      description: OSS 存储桶名
+      x-bucket:
+        dependency:
+          - region
