@@ -10,7 +10,9 @@ resources:
     props:
       region: ${vars.region}
       runtime: custom
+      cpu: 1
       memorySize: 3072
+      diskSize: 512
       timeout: 1200
       internetAccess: true
       role: '{{ roleArn }}'
