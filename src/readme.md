@@ -5,7 +5,7 @@
 
 <description>
 
-本案例是将 word 转 pdf 的逻辑封装成一个python函数，快速创建并部署到阿里云函数计算 FC。
+本案例展示了如何将 Word 转 PDF 的逻辑封装成一个 Python 函数，快速创建并部署到云原生应用开发平台 CAP。
 
 </description>
 
@@ -53,7 +53,7 @@
 
 <appdetail id="flushContent">
 
-本案例是将 word 转 pdf 的逻辑封装成一个python函数，快速创建并部署到阿里云函数计算 FC。
+本案例是将 word 转 pdf 的逻辑封装成一个python函数，快速创建并部署到云原生应用开发平台 CAP。
 
 运用了soffice，它是LibreOffice套件中的一个命令行工具，它允许用户启动LibreOffice的应用程序并处理文档
 1. 文档处理：soffice可以用来打开、编辑、转换不同格式的文档文件，包括文字处理文档、电子表格、演示文稿等。
