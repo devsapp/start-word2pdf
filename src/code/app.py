@@ -159,9 +159,11 @@ def invoke():
         # subprocess.check_call(["ls", "-ll", "/tmp"])
         print("FC Invoke End RequestId: " + request_id)
         if result.status == 200:
-            return "upload to oss success!"
+            print("upload to oss success!")
+            return {"code": "Success"}
         else:
-            return "upload fail, error code %s " % result.status
+            print("upload fail, error code %s " % result.status)
+            return {"code": "Failed"}
 
     except Exception as e:
         exc_info = sys.exc_info()
